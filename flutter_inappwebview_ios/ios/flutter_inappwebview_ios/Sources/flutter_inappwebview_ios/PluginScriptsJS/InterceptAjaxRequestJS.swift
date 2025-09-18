@@ -51,7 +51,8 @@ public class InterceptAjaxRequestJS {
     
     public static func INTERCEPT_AJAX_REQUEST_JS_SOURCE(initialUseOnAjaxReadyStateChange: Bool, initialUseOnAjaxProgress: Bool) -> String {
         return """
-        \(FLAG_VARIABLE_FOR_SHOULD_INTERCEPT_AJAX_REQUEST_JS_SOURCE()) = true;
+        var w = (window.top == null || window.top === window) ? window : window.top;
+        w.\(FLAG_VARIABLE_FOR_SHOULD_INTERCEPT_AJAX_REQUEST_JS_SOURCE()) = true;
         \(FLAG_VARIABLE_FOR_ON_AJAX_READY_STATE_CHANGE()) = \(initialUseOnAjaxReadyStateChange);
         \(FLAG_VARIABLE_FOR_ON_AJAX_PROGRESS()) = \(initialUseOnAjaxProgress);
         (function(ajax) {
